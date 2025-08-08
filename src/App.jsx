@@ -110,6 +110,18 @@ const App = () => {
 
 const totalStrength = calculateTotalStrength(team);
 
+
+  const calculateTotalAgility = (team) => {
+  const { totalAgility } = team.reduce((totals, zombieFighter) => {
+    totals.totalAgility += zombieFighter.agility;
+    return totals;
+  }, { totalAgility: 0 });
+
+  return totalAgility;
+};
+
+const totalAgility = calculateTotalAgility(team);
+
   return (
     <div>
       <h1>Apocalypse Team!</h1>
@@ -147,6 +159,8 @@ const totalStrength = calculateTotalStrength(team);
       )}
 
 <h4>Total Strength: {totalStrength}</h4>
+
+<h4>Total Agility: {totalAgility}</h4>
     </div>
   );
 };
