@@ -99,28 +99,31 @@ const App = () => {
     }
   };
 
+  const handleRemoveFighter = (lostFighter) => {
+    setTeam((oldTeam) => oldTeam.filter(chosenFighter => chosenFighter.id !== lostFighter.id));
+    setZombieFighters((oldFighters) => [...oldFighters, lostFighter]);
+    setMoney((oldMoney) => oldMoney + lostFighter.price);
+  };
+
   const calculateTotalStrength = (team) => {
-  const { totalStrength } = team.reduce((totals, zombieFighter) => {
-    totals.totalStrength += zombieFighter.strength;
-    return totals;
-  }, { totalStrength: 0 });
+    const { totalStrength } = team.reduce((totals, zombieFighter) => {
+      totals.totalStrength += zombieFighter.strength;
+      return totals;
+    }, { totalStrength: 0 });
 
-  return totalStrength;
-};
-
-const totalStrength = calculateTotalStrength(team);
-
+    return totalStrength;
+  };
+  const totalStrength = calculateTotalStrength(team);
 
   const calculateTotalAgility = (team) => {
-  const { totalAgility } = team.reduce((totals, zombieFighter) => {
-    totals.totalAgility += zombieFighter.agility;
-    return totals;
-  }, { totalAgility: 0 });
+    const { totalAgility } = team.reduce((totals, zombieFighter) => {
+      totals.totalAgility += zombieFighter.agility;
+      return totals;
+    }, { totalAgility: 0 });
 
-  return totalAgility;
-};
-
-const totalAgility = calculateTotalAgility(team);
+    return totalAgility;
+  };
+  const totalAgility = calculateTotalAgility(team);
 
   return (
     <div>
@@ -152,20 +155,16 @@ const totalAgility = calculateTotalAgility(team);
               <p>Price: ${zombieFighter.price}</p>
               <p>Strength: {zombieFighter.strength}</p>
               <p>Agility: {zombieFighter.agility}</p>
-              <button onClick={() => handleAddFighter(zombieFighter)}>Add</button>
+              <button onClick={() => handleRemoveFighter(zombieFighter)}>Remove</button>
             </li>
           ))}
         </ul>
       )}
 
-<h4>Total Strength: {totalStrength}</h4>
-
-<h4>Total Agility: {totalAgility}</h4>
+      <h4>Total Strength: {totalStrength}</h4>
+      <h4>Total Agility: {totalAgility}</h4>
     </div>
   );
 };
-
-
-
 
 export default App;
