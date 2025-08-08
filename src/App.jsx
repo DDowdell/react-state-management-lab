@@ -90,8 +90,10 @@ const App = () => {
   )
 
   return (
-    <>
-    <h1>Hello world!</h1>
+    <div>
+    <h1>Fight Team!</h1>
+    <h2>Total Money: ${money}</h2>
+
     <ul>
       {zombieFighters.map((zombieFighter) => (
         <li key={zombieFighter.id}>
@@ -102,10 +104,9 @@ const App = () => {
           <p>Agility: {zombieFighter.agility}</p>
           <button>Add</button>
         </li>
-
       ))}
     </ul>
-    </>
+    </div>
   );
 }
 
