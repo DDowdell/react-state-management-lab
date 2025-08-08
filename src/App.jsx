@@ -89,6 +89,16 @@ const App = () => {
 
   )
 
+  const handleAddFighter = (newFighter) => {
+    if (money >= newFighter.price) {
+      setTeam((oldTeam) => [...oldTeam, newFighter]);
+      setZombieFighters((oldFighters) => oldFighters.filter(chosenFighter => chosenFighter.id !== newFighter.id));
+      setMoney((oldMoney) => oldMoney - newFighter.price);
+    } else {
+      console.log("Not enough money");
+    }
+  };
+
   return (
     <div>
     <h1>Fight Team!</h1>
@@ -102,12 +112,14 @@ const App = () => {
           <p>Price: ${zombieFighter.price}</p>
           <p>Strength: {zombieFighter.strength}</p>
           <p>Agility: {zombieFighter.agility}</p>
-          <button>Add</button>
+          <button onClick={() => handleAddFighter(zombieFighter)}>Add</button>
         </li>
       ))}
     </ul>
     </div>
   );
-}
+};
+
+
 
 export default App;
